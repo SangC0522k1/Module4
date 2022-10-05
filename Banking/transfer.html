@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer</title>
+    <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/all.min.css">
+    <style>
+        .row-head {
+            background-color: rgb(58, 116, 224);
+            color: white;
+            height: 100px;
+            padding: 20px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row>div>a {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .button-head {
+            text-align: end;
+        }
+
+        .row-body {
+            margin-top: 20px;
+        }
+
+        .row-body>div>div {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row row-head">
+            <div class="col-8">
+                <h2>Transfer money Information</h2>
+            </div>
+            <div class="col-4 button-head">
+                <a href="index.html" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>
+                    List of customers</a>
+            </div>
+        </div>
+
+        <form>
+            <div class="row row-body">
+                <div class="mb-3 col-md-3">
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Sender ID</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1">
+                    </div>
+                    <div>
+                        <label for="sel1" class="form-label">Recipient Name</label>
+                        <select class="form-select" id="sel1" name="sellist1">
+                        <option>(1165) Akeem Walter 111</option>
+                        <option>(1175) Amaya Baker</option>
+                        <option>(1185) Christian Butler</option>
+                        <option>(1195) Edan Roach</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Sender Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1">
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Transfer Amount ($)</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1">
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Fees (%)</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Sender balance</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1">
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Total amount of transaction ($)</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1">
+                    </div>
+                </div>
+                <div class=" mb-3 col-md-12">
+                    <button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfer</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+
+    <script src="bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

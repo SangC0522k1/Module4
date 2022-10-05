@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Monney Information</title>
+    <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/all.min.css">
+    <style>
+        .row-head {
+            background-color: rgb(58, 116, 224);
+            color: white;
+            height: 100px;
+            padding: 20px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row>div>a {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .button-head {
+            text-align: end;
+        }
+
+        thead {
+            background-color: rgb(10, 141, 21);
+            text-align: center;
+            color: white;
+        }
+        .foot-border {
+            border-top: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row row-head">
+            <div class="col-8">
+                <h1>Transfer money Information</h1>
+            </div>
+            <div class="col-4 button-head">
+                <a href="index.html" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>
+                    Customer list</a>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Sender ID</th>
+                        <th scope="col">Sender Name</th>
+                        <th scope="col">Recipient ID</th>
+                        <th scope="col">Recipient Name</th>
+                        <th scope="col">Transfer Amount ($)</th>
+                        <th scope="col">Fees (%)</th>
+                        <th scope="col">Fees Amount ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">35</td>
+                        <td>Tatiana Kim</td>
+                        <td class="text-center">5</td>
+                        <td>Cody Avila</td>
+                        <td class="text-end num-comma pr-20">5000000</td>
+                        <td class="text-center">10</td>
+                        <td class="text-end num-comma pr-20">500000</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">35</td>
+                        <td>Tatiana Kim</td>
+                        <td class="text-center">5</td>
+                        <td>Cody Avila</td>
+                        <td class="text-end num-comma pr-20">5000000</td>
+                        <td class="text-center">10</td>
+                        <td class="text-end num-comma pr-20">500000</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">35</td>
+                        <td>Tatiana Kim</td>
+                        <td class="text-center">5</td>
+                        <td>Cody Avila</td>
+                        <td class="text-end num-comma pr-20">5000000</td>
+                        <td class="text-center">10</td>
+                        <td class="text-end num-comma pr-20">500000</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="foot-border">
+                        <td colspan="5"></td>
+                        <td class="text-center fw-bold">Total Fees Amount:</td>
+                        <td colspan="2" class="text-end fw-bold  pr-20 num-comma" style="font-size: 24px">1501505</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
