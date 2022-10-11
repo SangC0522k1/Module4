@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/all.min.css">
     <style>
-        .row-head {
+        .row-head{
             background-color: rgb(58, 116, 224);
             color: white;
             height: 100px;
@@ -28,7 +28,7 @@
             text-align: end;
         }
 
-        .row-body {
+        form {
             margin-top: 20px;
         }
 
@@ -36,79 +36,105 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
-       
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row row-head">
-            <div class="col-8">
-                <h2>Transfer money Information</h2>
-            </div>
-            <div class="col-4 button-head">
-                <a href="index.html" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>
-                    List of customers</a>
-            </div>
+<div class="container">
+    <div class="row row-head">
+        <div class="col-8">
+            <h2>Transfer</h2>
         </div>
-
-        <form>
-            <div class="row row-body">
+        <div class="col-4 button-head">
+            <a href="/customers" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>
+                List of customers</a>
+        </div>
+    </div>
+    <form id="frmTransfer" method="post" novalidate="novalidate" th:object="${sender}">
+        <fieldset class="row g-3">
+            <div class="form-group row">
                 <div class="mb-3 col-md-3">
-                    <div>
-                        <label for="exampleInputid" class="form-label">Sender ID</label>
-                        <input type="number" class="form-control" id="exampleInputid">
+                    <label class="col-sm-12 col-form-label">Sender ID</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" readonly="" th:field="*{id}">
                     </div>
-                    <div>
-                        <label for="sel1" class="form-label">Recipient Name</label>
-                        <select class="form-select" id="sel1" name="sellist1">
-                        <option>(1165) Akeem Walter 111</option>
-                        <option>(1175) Amaya Baker</option>
-                        <option>(1185) Christian Butler</option>
-                        <option>(1195) Edan Roach</option>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="col-sm-12 col-form-label">Sender Name</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control valid" readonly="" th:field="*{fullName}">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="col-sm-12 col-form-label">Email</label>
+                    <div class="col-sm-12">
+                        <input type="email" class="form-control" readonly="" th:field="*{email}">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="col-sm-12 col-form-label">Sender balance</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control num-space" readonly="" th:field="*{balance}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mb-4" th:object="${transfer}">
+                <div class="mb-3 col-md-3">
+                    <label class="col-sm-12 col-form-label">Recipient ID</label>
+                    <div class="col-sm-12">
+                        <select th:field="*{recipient}" class="form-select">
+                            <th:block th:each="recipient : ${recipients}">
+                                <option th:value="${recipient.id}" th:text="${'(' + recipient.id + ') ' + '- ' + recipient.fullName}"></option>
+                            </th:block>
                         </select>
                     </div>
                 </div>
                 <div class="mb-3 col-md-3">
-                    <div>
-                        <label for="exampleInputname" class="form-label">Sender Name</label>
-                        <input type="text" class="form-control" id="exampleInputname">
-                    </div>
-                    <div>
-                        <label for="exampleInputtransfer" class="form-label">Transfer Amount ($)</label>
-                        <input type="text" class="form-control" id="exampleInputtransfer">
+                    <label class="col-sm-12 col-form-label">Transfer Amount ($)</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" th:field="*{transferAmount}">
                     </div>
                 </div>
                 <div class="mb-3 col-md-3">
-                    <div>
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail">
-                    </div>
-                    <div>
-                        <label for="exampleInputEmail1" class="form-label">Fees (%)</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1">
+                    <label class="col-sm-12 col-form-label">Fees (%)</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" value="10" readonly="">
                     </div>
                 </div>
                 <div class="mb-3 col-md-3">
-                    <div>
-                        <label for="exampleInputsender" class="form-label">Sender balance</label>
-                        <input type="number" class="form-control" id="exampleInputsender">
+                    <label class="col-sm-12 col-form-label">Total amount of transaction ($)</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control num-space" readonly="" th:field="*{transactionAmount}">
                     </div>
-                    <div>
-                        <label for="exampleInputtransaction" class="form-label">Total amount of transaction ($)</label>
-                        <input type="number" class="form-control" id="exampleInputtransaction">
-                    </div>
-                </div>
-                <div class=" mb-3 col-md-12">
-                    <button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfer</button>
                 </div>
             </div>
-        </form>
-
-
-    </div>
-
-    <script src="/assets/bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+            <div class="form-group row">
+                <div class="mb-3 col-md-12">
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fa fa-exchange" aria-hidden="true"></i>
+                            Transfer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="alert" style="position: fixed; bottom: 0">
+    <th:block th:if="${message}">
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <span th:text="${message}"></span>
+        </div>
+    </th:block>
+    <th:block th:if="${error}">
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button>
+            <span th:text="${error}"></span>
+        </div>
+    </th:block>
+</div>
 </body>
 
 </html>
