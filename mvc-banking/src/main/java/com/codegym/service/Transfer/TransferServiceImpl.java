@@ -66,5 +66,10 @@ public class TransferServiceImpl implements TransferService{
                 return null;
             }
     }
+
+    @Override
+    public BigDecimal getSumFeesAmount() {
+        return transferRepository.getSumFeesAmount();
+    }
 }
 
