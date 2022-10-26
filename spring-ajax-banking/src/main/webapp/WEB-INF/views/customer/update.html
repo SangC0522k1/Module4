@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/bootstrap/v5.2.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/font-awesome/v5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/assets/sweetalert/v2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Update customer</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="row">
+            <div class="col-sm-5">
+                <h1>Update customer</h1>
+            </div>
+            <div class="col-sm-7">
+                <a href="/customers" class="btn btn-outline-light">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span>List of customers</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <form method="post" th:object="${customer}">
+            <div class="row col-lg-12 mt-3">
+                <div class="col-lg-6">
+                    <label>Full Name</label>
+                    <input type="text" th:field="*{fullName}" class="form-control">
+                </div>
+                <div class="col-lg-6">
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}" class="form-control">
+                </div>
+            </div>
+            <div class="row col-lg-12 mt-3">
+                <div class="col-lg-6">
+                    <label>Phone</label>
+                    <input type="tel" th:field="*{phone}" class="form-control">
+                </div>
+                <div class="col-lg-6">
+                    <label>Address</label>
+                    <input type="text" th:field="*{address}" class="form-control">
+                </div>
+            </div>
+            <div class="row col-lg-12 mt-3">
+                <div class="col-lg-3">
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-pencil-alt"></i>
+                        <span>Update</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    <div id="message-alert">
+        <th:block th:if="${success} == true">
+            <div class="alert-success">
+                <h5><span>Successfully update customer</span></h5>
+            </div>
+            <span id="close">X</span>
+        </th:block>
+        <th:block th:if="${error} == true">
+            <div class="alert-danger">
+                <h5>Please correct errors below:</h5>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<script type="text/javascript" src="/assets/sweetalert/v2/sweetalert2.js"></script>
+<script type="text/javascript" src="/assets/bootstrap/v5.2.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

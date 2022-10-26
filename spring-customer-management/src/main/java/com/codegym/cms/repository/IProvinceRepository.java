@@ -1,6 +1,6 @@
-package com.codegym.repository;
+package com.codegym.cms.repository;
 
-import com.codegym.model.Province;
+import com.codegym.cms.model.Province;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

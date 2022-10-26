@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/bootstrap/v5.2.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/font-awesome/v5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/assets/sweetalert/v2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Transfer</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="col-sm-5">
+                    <h1>Transfer</h1>
+                </div>
+                <div class="col-sm-7">
+                    <a href="/customers" class="btn btn-outline-light">
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                        <span>List of customers</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <form method="post" th:object="${transfer}">
+                <div class="row col-lg-12 mt-3">
+                    <div class="col-lg-3">
+                        <label>Sender ID</label>
+                        <input type="text" th:field="${sender.id}" class="form-control">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Full Name</label>
+                        <input type="text" th:field="${sender.fullName}" class="form-control">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Email</label>
+                        <input type="email" th:field="${sender.email}" class="form-control">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Balance</label>
+                        <input type="text" th:field="${sender.balance}" class="form-control">
+                    </div>
+                </div>
+                <div class="row col-lg-12 mt-3">
+                    <div class="col-lg-3">
+                        <label>Recipient Name</label>
+                        <select th:field="*{recipient}" class="form-control">
+                            <th:block th:each="item : ${recipients}">
+                                <option th:value="${item.id}" th:text="${'(' +item.id + ') ' + item.fullName}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Transfer Amount ($)</label>
+                        <input type="text" th:field="*{transferAmount}" class="form-control">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fees (%)</label>
+                        <input type="text" name="fees" value="10" class="form-control" readonly>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Transaction Amount ($)</label>
+                        <input type="text" th:field="*{transactionAmount}" class="form-control">
+                    </div>
+                </div>
+                <div class="row col-lg-12 mt-3">
+                    <div class="col-lg-3">
+                        <button class="btn btn-outline-primary">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transfer</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div id="message-alert">
+            <th:block th:if="${success} == true">
+                <div class="alert-success">
+                    <h5><span>Successfully transfer</span></h5>
+                </div>
+                <span id="close">X</span>
+            </th:block>
+            <th:block th:if="${error} == true">
+                <div class="alert-danger">
+                    <h5>Please correct errors below:</h5>
+                    <h6 th:text="${message}"></h6>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/assets/sweetalert/v2/sweetalert2.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap/v5.2.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        let elemTransferAmount = document.getElementById("transferAmount");
+
+        elemTransferAmount.addEventListener("input", function () {
+            let transferAmount = +document.getElementById("transferAmount").value;
+            let fees = 10;
+            let feesAmount = transferAmount * fees / 100;
+            let transactionAmount = transferAmount + feesAmount;
+
+            document.getElementById("transactionAmount").value = transactionAmount;
+        })
+
+
+    </script>
+
+</body>
+</html>

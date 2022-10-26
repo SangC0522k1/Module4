@@ -1,16 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: USER
-  Date: 10/5/2022
-  Time: 11:33 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View province</title>
+</head>
+<body>
+<h1>View province: <span th:text="${province.name}"></span></h1>
+<a href="/provinces">Province list</a>
+<table border="1">
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+    </tr>
+    <th:block th:each="customer : ${customers}">
+        <tr>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
 </html>

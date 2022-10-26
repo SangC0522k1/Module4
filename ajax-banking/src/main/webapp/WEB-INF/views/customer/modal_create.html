@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<th:block th:fragment="modal_create">
+    <div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal create</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmCreate" method="post">
+                        <div class="row col-lg-12 mt-3">
+                            <div class="col-lg-6">
+                                <label>Full Name</label>
+                                <input type="text" id="fullName" name="fullName" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Email</label>
+                                <input type="email" id="email" name="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row col-lg-12 mt-3">
+                            <div class="col-lg-6">
+                                <label>Phone</label>
+                                <input type="tel" id="phone" name="phone" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Address</label>
+                                <input type="text" id="address" name="address" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btnCreate" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

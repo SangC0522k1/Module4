@@ -25,7 +25,7 @@ public class PhoneController {
         }
         else {
             model.addAttribute("phoneNumber", phoneNumber);
-            return "/WEB-INF/result.html";
+            return "/result";
         }
     }
 }

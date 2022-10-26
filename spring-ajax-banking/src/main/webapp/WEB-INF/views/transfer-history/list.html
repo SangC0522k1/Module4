@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="layout/head" />
+    <title>Transfer history</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="row">
+            <div class="col-sm-5">
+                <h1>Transfer history</h1>
+            </div>
+            <div class="col-sm-7">
+                <a href="/customers" class="btn btn-outline-light">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span>List of customers</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sender ID</th>
+                    <th>Sender Name</th>
+                    <th>Recipient ID</th>
+                    <th>Recipient Name</th>
+                    <th>Transfer Amount ($)</th>
+                    <th>Fees (%)</th>
+                    <th>Fees Amount ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="item : ${transfers}">
+                    <tr>
+                        <td th:text="${item.id}"></td>
+                        <td th:text="${item.sender.id}"></td>
+                        <td th:text="${item.sender.fullName}"></td>
+                        <td th:text="${item.recipient.id}"></td>
+                        <td th:text="${item.recipient.fullName}"></td>
+                        <td th:text="${item.transferAmount}"></td>
+                        <td th:text="${item.fees}"></td>
+                        <td th:text="${item.feesAmount}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">Total Fees Amount:</td>
+                    <td colspan="2" th:text="${allFeesAmount}"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<th:block th:replace="layout/script" />
+
+</body>
+</html>

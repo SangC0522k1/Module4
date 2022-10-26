@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="layout/head" />
+    <title>List of customers</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="col-sm-5">
+                    <h1>List of customers</h1>
+                </div>
+                <div class="col-sm-7">
+                    <button id="btnShowCreateModal" class="btn btn-outline-light">
+                        <i class="fas fa-plus"></i>
+                        <span>Add New Customer</span>
+                    </button>
+                    <a href="/transfers" class="btn btn-outline-light">
+                        <i class="fas fa-history"></i>
+                        <span>Transfer money Information</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <table id="tbCustomer" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>FullName</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Balance</th>
+                        <th colspan="5">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="item : ${customers}">
+                        <tr>
+                            <td th:text="${item.id}"></td>
+                            <td th:text="${item.fullName}"></td>
+                            <td th:text="${item.email}"></td>
+                            <td class="text-center" th:text="${item.phone}"></td>
+                            <td th:text="${item.address}"></td>
+                            <td class="text-end num-space" th:text="${item.balance}"></td>
+                            <td class="text-center">
+                                <a class="btn btn-outline-secondary" title="" data-toggle="tooltip" th:href="${'/customers/edit/' + item.id}" data-bs-original-title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-outline-success" title="" data-toggle="tooltip" th:href="${'/customers/deposit/' + item.id}" data-bs-original-title="Deposit">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-outline-warning" title="" data-toggle="tooltip" th:href="@{/customers/withdraw/__${item.id}__}" data-bs-original-title="Withdraw">
+                                    <i class="fas fa-minus"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-outline-primary" title="" data-toggle="tooltip" th:href="@{/customers/transfer/__${item.id}__}" data-bs-original-title="Transfer">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-outline-danger" title="" data-toggle="tooltip" th:href="@{/customers/delete/__${item.id}__}" data-bs-original-title="Suspended">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <th:block th:replace="customer/modal_create" />
+
+    <th:block th:replace="layout/script" />
+
+    <script>
+        $("#btnShowCreateModal").on("click", () => {
+            $("#modalCreate").modal("show");
+        });
+
+        $("#btnCreate").on("click", () => {
+            $("#frmCreate").trigger("submit");
+        })
+
+        function createCustomer() {
+
+            let customer = {
+                fullName: $("#fullName").val(),
+                email: $("#email").val(),
+                phone: $("#phone").val(),
+                address: $("#address").val(),
+            }
+
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "POST",
+                url: "http://localhost:8089/api/customers/create",
+                data: JSON.stringify(customer)
+            })
+            .done((data) => {
+                console.log(data);
+
+                let str = `
+                    <tr>
+                        <td>${data.id}</td>
+                        <td>${data.fullName}</td>
+                        <td>${data.email}</td>
+                        <td class="text-center">${data.phone}</td>
+                        <td>${data.address}</td>
+                        <td class="text-end num-space">${data.balance}</td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-secondary" title="" data-toggle="tooltip"  data-bs-original-title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-success" title="" data-toggle="tooltip" data-bs-original-title="Deposit">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-warning" title="" data-toggle="tooltip" data-bs-original-title="Withdraw">
+                                <i class="fas fa-minus"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-primary" title="" data-toggle="tooltip" data-bs-original-title="Transfer">
+                                <i class="fas fa-exchange-alt"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-danger" title="" data-toggle="tooltip" data-bs-original-title="Suspended">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+
+                $("#tbCustomer tbody").prepend(str);
+
+                $("#modalCreate").modal("hide");
+            })
+            .fail((jqXHR) => {
+                alert("Create Fail");
+            })
+        }
+
+        $("#frmCreate").validate({
+            rules: {
+                fullName: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 35
+                }
+            },
+            messages: {
+                fullName: {
+                    required: "Vui lòng nhập tên đầy đủ",
+                    minlength: "Họ tên tối thiểu 5 ký tự",
+                    maxlength: "Họ tên tối đa 35 ký tự"
+                }
+            },
+            submitHandler: function () {
+                createCustomer();
+            }
+        })
+
+    </script>
+
+</body>
+</html>

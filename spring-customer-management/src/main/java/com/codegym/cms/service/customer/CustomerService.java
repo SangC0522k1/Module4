@@ -1,13 +1,13 @@
-package com.codegym.service.customer;
+package com.codegym.cms.service.customer;
 
-import com.codegym.model.Customer;
-import com.codegym.model.Province;
-import com.codegym.repository.ICustomerRepository;
+import com.codegym.cms.model.Customer;
+import com.codegym.cms.model.Province;
+import com.codegym.cms.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.Optional;
 
 @Service

@@ -1,11 +1,11 @@
-package com.codegym.service.customer;
+package com.codegym.cms.service.customer;
 
-import com.codegym.model.Customer;
-import com.codegym.model.Province;
-import com.codegym.service.IGeneralService;
+import com.codegym.cms.model.Customer;
+import com.codegym.cms.model.Province;
+import com.codegym.cms.service.IGeneralService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 
 public interface ICustomerService extends IGeneralService<Customer> {
     Iterable<Customer> findAllByProvince(Province province);
