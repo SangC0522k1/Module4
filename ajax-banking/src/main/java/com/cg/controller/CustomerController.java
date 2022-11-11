@@ -1,6 +1,5 @@
 package com.cg.controller;
 
-import com.cg.model.Customer;
 import com.cg.model.Deposit;
 import com.cg.model.Transfer;
 import com.cg.model.dto.DepositDTO;
@@ -44,7 +43,7 @@ public class CustomerController<Customer> {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("customer/create");
 
-        Customer customer = new C;
+        Customer customer = new cus;
         modelAndView.addObject("customer", customer);
 
         return modelAndView;
@@ -55,7 +54,7 @@ public class CustomerController<Customer> {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("customer/update");
 
-        Optional<Customer> customerOptional = customerService.findById(customerId);
+        Optional<Customer> customerOptional = customerService.findById(customerId)
 
         if (!customerOptional.isPresent()){
             modelAndView.addObject("error", true);

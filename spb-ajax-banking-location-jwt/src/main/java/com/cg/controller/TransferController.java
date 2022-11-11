@@ -26,7 +26,7 @@ public class TransferController {
     @GetMapping
     public ModelAndView showListHistory() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("transfer-history/list");
+        modelAndView.setViewName("transfers/list");
 
         List<Transfer> transfers = transferService.findAll();
 

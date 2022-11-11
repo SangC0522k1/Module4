@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="/layout/layout :: head"></th:block>
+    <title>Withdraw</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row row-head">
+            <div class="col-8">
+                <h2>Withdraw money from the customer's account</h2>
+            </div>
+            <div class="col-4 button-head">
+                <a href="/customers" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>
+                    List of customers</a>
+            </div>
+        </div>
+
+        <form th:action="@{/withdraw-customer/__${customer.id}__}" th:object="${withdraw}" method="post">
+            <div class="row row-body">
+                <div class="mb-3 col-md-6">
+                    <div>
+                        <label for="exampleInputEmail1" class="form-label">Customer ID</label>
+                        <input readonly type="number" th:field="${customer.id}"  class="form-control" id="exampleInputEmail1">
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail2" class="form-label">Current balance ($)</label>
+                        <input  readonly type="number" th:field="${customer.balance}"  class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <div>
+                        <label for="exampleInputEmail3" class="form-label">Full Name</label>
+                        <input readonly type="text" th:field="${customer.fullName}"  class="form-control" id="exampleInputEmail3">
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail4" class="form-label">Transaction Amount ($)</label>
+                        <input th:field="*{transactionAmount}" type="number" class="form-control" id="exampleInputEmail4" >
+                    </div>
+                </div>
+                <div class=" mb-3 col-md-12">
+                    <button type="submit" class="btn btn-outline-warning"><i class="fa-solid fa-minus"></i> Withdraw</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <th:block th:replace="/layout/layout :: footer"></th:block>
+</body>
+
+</html>

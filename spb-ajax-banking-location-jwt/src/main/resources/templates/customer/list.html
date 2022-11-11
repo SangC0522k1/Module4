@@ -14,11 +14,13 @@
                 <h1>List of customers</h1>
             </div>
             <div class="col-sm-7">
-                            <a href="/logout">-->
-                                <button type="button" class="btn btn-outline-light">
-                                    <img src="https://luv.vn/wp-content/uploads/2021/09/hinh-anh-nu-sinh-dep-nhat-69.jpg" alt="user-image" class="rounded-circle"> <th:block th:text="${username}"/>
-                                </button>
-                            </a>
+                <a href="/logout">-->
+                    <button type="button" class="btn btn-outline-light">
+                        <img src="https://luv.vn/wp-content/uploads/2021/09/hinh-anh-nu-sinh-dep-nhat-69.jpg"
+                             alt="user-image" class="rounded-circle">
+                        <th:block th:text="${username}"/>
+                    </button>
+                </a>
                 <button id="btnShowCreateModal" class="btn btn-outline-light">
                     <i class="fas fa-plus"></i>
                     <span>Add New Customer</span>
@@ -150,7 +152,7 @@
                         </div>
                         <div class="col-lg-3">
                             <label>District</label>
-                            <select name="districtIdUp" id="districtIdUp" class="form-control">
+                            <select name="districtIdUp" id="districtIdUp" class="form-control" >
 
                             </select>
                         </div>
@@ -191,17 +193,17 @@
                     <div class="row col-lg-12 mt-3">
                         <div class="col-lg-6">
                             <label>Customer ID</label>
-                            <input type="text" id="customerIdDep" name="customerIdDep" class="form-control">
+                            <input type="text" id="customerIdDep" name="customerIdDep" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-6">
                             <label>Full Name</label>
-                            <input type="text" id="fullNameDep" name="fullNameDep" class="form-control">
+                            <input type="text" id="fullNameDep" name="fullNameDep" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                     </div>
                     <div class="row col-lg-12 mt-3">
                         <div class="col-lg-6">
                             <label>Current balance ($)</label>
-                            <input type="text" id="balanceDep" name="balanceDep" class="form-control">
+                            <input type="text" id="balanceDep" name="balanceDep" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-6">
                             <label>Transaction Amount ($)</label>
@@ -236,17 +238,17 @@
                     <div class="row col-lg-12 mt-3">
                         <div class="col-lg-6">
                             <label>Customer ID</label>
-                            <input type="text" id="customerIdWd" name="customerIdWd" class="form-control">
+                            <input type="text" id="customerIdWd" name="customerIdWd" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-6">
                             <label>Full Name</label>
-                            <input type="text" id="fullNameWd" name="fullNameWd" class="form-control">
+                            <input type="text" id="fullNameWd" name="fullNameWd" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                     </div>
                     <div class="row col-lg-12 mt-3">
                         <div class="col-lg-6">
                             <label>Current balance ($)</label>
-                            <input type="text" id="balanceWd" name="balanceWd" class="form-control">
+                            <input type="text" id="balanceWd" name="balanceWd" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-6">
                             <label>Transaction Amount ($)</label>
@@ -281,19 +283,19 @@
                     <div class="row col-lg-12 mt-3">
                         <div class="col-lg-3">
                             <label>Sender ID</label>
-                            <input type="text" id="senderIdTrf" name="senderIdTrf" class="form-control">
+                            <input type="text" id="senderIdTrf" name="senderIdTrf" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-3">
                             <label>Full Name</label>
-                            <input type="text" id="fullNameTrf" name="fullNameTrf" class="form-control">
+                            <input type="text" id="fullNameTrf" name="fullNameTrf" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-3">
                             <label>Email</label>
-                            <input type="email" id="emailTrf" name="emailTrf" class="form-control">
+                            <input type="email" id="emailTrf" name="emailTrf" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-3">
                             <label>Balance</label>
-                            <input type="text" id="balanceTrf" name="balanceTrf" class="form-control">
+                            <input type="text" id="balanceTrf" name="balanceTrf" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                     </div>
                     <div class="row col-lg-12 mt-3">
@@ -308,11 +310,12 @@
                         </div>
                         <div class="col-lg-3">
                             <label>Fees (%)</label>
-                            <input type="text" name="feesTrf" value="10" class="form-control" readonly>
+                            <input type="text" name="feesTrf" value="10" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-3">
                             <label>Transaction Amount ($)</label>
-                            <input type="text" id="transactionAmountTrf" name="transactionAmountTrf" class="form-control" readonly>
+                            <input type="text" id="transactionAmountTrf" name="transactionAmountTrf"
+                                   class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                     </div>
                 </form>
@@ -328,14 +331,14 @@
     </div>
 </div>
 
-<th:block th:replace="layout/script" />
+<th:block th:replace="layout/script"/>
 
 <script>
     let page = {
         urls: {
             getAllCustomers: App.BASE_URL_CUSTOMER,
             getCustomerById: App.BASE_URL_CUSTOMER,
-            getAllRecipients: App.BASE_URL_CUSTOMER + "/get-all-recipients-without-sender/",
+            getAllRecipients: App.BASE_URL_CUSTOMER + "/get-all-recipients-without-sender",
             createCustomer: App.BASE_URL_CUSTOMER + "/create",
             deposit: App.BASE_URL_CUSTOMER + "/deposit",
             withdraw: App.BASE_URL_CUSTOMER + "/withdraw",
@@ -412,7 +415,6 @@
     page.dialogs.elements.modalTransferError = $("#modalTransfer .modal-body .modal-alert-danger");
 
 
-
     page.commands.getAllCustomers = () => {
         $.ajax({
             headers: {
@@ -430,7 +432,6 @@
                 });
 
                 page.commands.handleShowFooterButton();
-
                 page.commands.handleOpenModalDeposit();
                 page.commands.handleOpenModalWithdraw();
                 page.commands.handleOpenModalTransfer();
@@ -540,7 +541,7 @@
     }
 
     page.commands.getAllRecipients = (senderId) => {
-        return  $.ajax({
+        return $.ajax({
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json"
@@ -619,10 +620,6 @@
 
     page.dialogs.elements.btnWithdraw.on("click", () => {
         page.dialogs.elements.frmWithdraw.trigger("submit");
-    })
-
-    page.dialogs.elements.btnTransfer.on("click", () => {
-        page.dialogs.elements.frmTransfer.trigger("submit");
     })
 
     page.dialogs.elements.provinceCre.on("change", function () {
@@ -728,13 +725,13 @@
     }
 
     page.commands.handleDeleteCustomer = () => {
-        $("#tbCustomer tbody .delete").on("click", function () {
-            let customerId = $(this).data("id");
+        page.elements.footer.find(".delete").on("click", function () {
+            let customerId = page.elements.currentRow.val();
 
-            App.SweetAlert.showSuspendedConfirmDialog()
+            App.SweetAlert.showDeleteConfirmDialog()
                 .then((result) => {
                     if (result.isConfirmed) {
-                        page.commands.suspendedCustomer(customerId);
+                        page.commands.deleteCustomer(customerId);
                     }
                 });
         })
@@ -854,6 +851,7 @@
 
                 currentRow.replaceWith(App.renderRowCustomer(data, data.locationRegion));
 
+                page.commands.handleShowFooterButton();
                 page.commands.removeEventOpenModal();
                 page.commands.handleOpenModalDeposit();
                 page.commands.handleOpenModalWithdraw();
@@ -861,6 +859,7 @@
                 page.commands.handleDeleteCustomer();
 
                 $("#modalDeposit").modal("hide");
+                App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_DEPOSIT);
             })
             .fail((jqXHR) => {
                 App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_400);
@@ -941,6 +940,7 @@
                 page.commands.handleOpenModalWithdraw();
                 page.commands.handleOpenModalTransfer();
                 page.commands.handleDeleteCustomer();
+                page.commands.handleShowFooterButton();
 
                 page.dialogs.elements.modalWithdraw.modal("hide");
                 App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_WITHDRAW);
@@ -973,16 +973,17 @@
                 page.dialogs.elements.balanceTrf.val(sender.balance);
 
                 let senderCurrentRow = $("#tr_" + sender.id);
-                senderCurrentRow.replaceWith(App.renderRowCustomer(sender));
+                senderCurrentRow.replaceWith(App.renderRowCustomer(sender, sender.locationRegion));
 
                 let recipientCurrentRow = $("#tr_" + recipient.id);
-                recipientCurrentRow.replaceWith(App.renderRowCustomer(recipient));
+                recipientCurrentRow.replaceWith(App.renderRowCustomer(recipient, recipient.locationRegion));
 
                 page.commands.removeEventOpenModal();
                 page.commands.handleOpenModalDeposit();
                 page.commands.handleOpenModalWithdraw();
                 page.commands.handleOpenModalTransfer();
                 page.commands.handleDeleteCustomer();
+                page.commands.handleShowFooterButton();
 
                 // page.dialogs.elements.modalTransfer.modal("hide");
                 App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_TRANSFER);
@@ -996,8 +997,7 @@
 
                 if (message) {
                     str += `<label id="messageTrf-error" class="error" for="messageTrf">${message}</label>`;
-                }
-                else {
+                } else {
                     let errors = jqXHR.responseJSON;
 
                     $.each(errors, (key, value) => {
@@ -1009,7 +1009,7 @@
             })
     }
 
-    page.commands.suspendedCustomer = (customerId) => {
+    page.commands.deleteCustomer = (customerId) => {
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -1081,7 +1081,7 @@
                 maxlength: "Họ tên tối đa 50 ký tự"
             }
         },
-        submitHandler: function(){
+        submitHandler: function () {
             page.commands.updateCustomer();
         }
     })
@@ -1105,7 +1105,7 @@
         errorPlacement: function (error, element) {
             error.appendTo("#modalWithdraw .modal-alert-danger");
         },
-        showErrors: function(errorMap, errorList) {
+        showErrors: function (errorMap, errorList) {
             if (this.numberOfInvalids() > 0) {
                 $("#modalWithdraw .modal-alert-danger").removeClass("hide").addClass("show");
             } else {
@@ -1120,7 +1120,9 @@
     });
 
     page.dialogs.elements.frmTransfer.validate({
-        onkeyup: function(element) { $(element).valid() },
+        onkeyup: function (element) {
+            $(element).valid()
+        },
         onclick: false,
         onfocusout: false,
         rules: {
@@ -1141,7 +1143,7 @@
         errorPlacement: function (error, element) {
             error.appendTo("#modalTransfer .modal-alert-danger");
         },
-        showErrors: function(errorMap, errorList) {
+        showErrors: function (errorMap, errorList) {
             if (this.numberOfInvalids() > 0) {
                 $("#modalTransfer .modal-alert-danger").removeClass("hide").addClass("show");
             } else {
@@ -1177,6 +1179,7 @@
             page.commands.handleOpenModalDeposit();
             page.commands.handleOpenModalWithdraw();
             page.commands.handleOpenModalTransfer();
+            page.commands.handleDeleteCustomer();
         })
     }
 

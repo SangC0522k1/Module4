@@ -64,7 +64,7 @@ class App {
             })
         }
 
-        static showSuspendedConfirmDialog() {
+        static showDeleteConfirmDialog() {
             return Swal.fire({
                 icon: 'warning',
                 text: 'Are you sure to suspend the selected customer ?',
@@ -136,9 +136,9 @@ class App {
                     <i class="fa fa-exchange" ></i>
                     Transfer
                 </button>
-                <button class="btn btn-danger suspended" >
+                <button class="btn btn-danger delete" >
                     <i class="fa fa-ban" ></i>
-                    Suspended
+                    Delete
                 </button></div>
         `;
 
