@@ -1,6 +1,6 @@
 class App {
 
-    static DOMAIN_API = "http://localhost:9095";
+    static DOMAIN_API = "http://localhost:8089";
 
     static BASE_URL_CUSTOMER = this.DOMAIN_API + "/api/customers";
 
@@ -103,6 +103,22 @@ class App {
                 <i class="fas fa-pencil-alt"></i>
                 Update
             </button>
+              <button class="btn btn-success deposit">
+                    <i class="fa fa-plus"></i>
+                    Deposit
+                </button>
+                <button class="btn btn-warning withdraw" >
+                    <i class="fa fa-minus" ></i>
+                    Withdraw
+                </button>
+                <button class="btn btn-primary transfer">
+                    <i class="fa fa-exchange" ></i>
+                    Transfer
+                </button>
+                <button class="btn btn-danger delete" >
+                    <i class="fa fa-ban" ></i>
+                    Delete
+                </button></div>
         `;
 
         return str;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/bankingSpringMVCAjax.iml" filepath="$PROJECT_DIR$/.idea/bankingSpringMVCAjax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/c0522-spring-ajax-banking.iml" filepath="$PROJECT_DIR$/demo/c0522-spring-ajax-banking.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,84 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <th:block th:insert="/layout/layout :: head"></th:block>-->
+<!--    <title>Transfer</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--    <div class="container">-->
+<!--        <div class="row row-head">-->
+<!--            <div class="col-8">-->
+<!--                <h2>Transfer money Information</h2>-->
+<!--            </div>-->
+<!--            <div class="col-4 button-head">-->
+<!--                <a href="/customers" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>-->
+<!--                    List of customers</a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <form th:action="@{/transfer-customer/__${customer.id}__}" th:object="${transfer}" method="post">-->
+<!--            <div class="row row-body">-->
+<!--                <div class="mb-3 col-md-3">-->
+<!--                    <div>-->
+<!--                        <label for="exampleInputEmail" class="form-label">Sender ID</label>-->
+<!--                        <input readonly type="number" th:field="${customer.id}"  class="form-control" id="exampleInputEmail">-->
+<!--                    </div>-->
+<!--                    <div >-->
+<!--                        <label for="sel1" class="form-label">Recipient Name</label>-->
+
+<!--                        <select class="form-select" id="sel1" th:field="*{recipient}" >-->
+<!--                                <option th:each="item : ${customerRecipient}" th:value="${item.id}" th:text="'(' + ${item.id} + ') ' + ${item.fullName}"></option>-->
+<!--                        </select>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="mb-3 col-md-3">-->
+<!--                    <div>-->
+<!--                        <label for="exampleInputEmail0" class="form-label">Sender Name</label>-->
+<!--                        <input readonly type="text" th:field="${customer.fullName}" class="form-control" id="exampleInputEmail0">-->
+<!--                    </div>-->
+<!--                    <div >-->
+<!--                        <label for="exampleInputEmail1" class="form-label">Transfer Amount ($)</label>-->
+<!--                        <input oninput="myConvert()" name="transferAmount" th:value="*{transferAmount}" type="number" class="form-control" id="exampleInputEmail1">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="mb-3 col-md-3">-->
+<!--                    <div>-->
+<!--                        <label for="exampleInputEmail2" class="form-label">Email</label>-->
+<!--                        <input readonly th:field="${customer.email}" type="email" class="form-control" id="exampleInputEmail2">-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <label for="exampleInputEmail3" class="form-label">Fees (%)</label>-->
+<!--                        <input readonly name="fees" th:field="*{fees}"  type="number" class="form-control" id="exampleInputEmail3">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="mb-3 col-md-3">-->
+<!--                    <div>-->
+<!--                        <label for="exampleInputEmail4" class="form-label">Sender balance</label>-->
+<!--                        <input  readonly type="number" th:field="${customer.balance}" class="form-control" id="exampleInputEmail4">-->
+<!--                    </div>-->
+<!--                    <div >-->
+<!--                        <label for="exampleInputEmail5" class="form-label">Total amount of transaction ($)</label>-->
+<!--                        <input readonly type="number" th:field="*{transactionAmount}" class="form-control" id="exampleInputEmail5" name="transactionAmount">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class=" mb-3 col-md-12">-->
+<!--                    <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfer</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+
+<!--    </div>-->
+<!--    <script>-->
+<!--        function myConvert(){-->
+<!--            var x = document.getElementById("exampleInputEmail1").value;-->
+<!--            var y = document.getElementById("exampleInputEmail3").value;-->
+<!--            document.getElementById("exampleInputEmail5").value = (x * (1 + y/100)).toFixed(2);-->
+<!--        }-->
+<!--    </script>-->
+<!--    <th:block th:replace="/layout/layout :: footer"></th:block>-->
+<!--</body>-->
+
+<!--</html>-->

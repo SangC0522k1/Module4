@@ -1,0 +1,185 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Transfer Monney Information</title>-->
+<!--    <link rel="stylesheet" href="/assets/bootstrap-5.2.0/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="/assets/bootstrap-5.2.0/css/all.min.css">-->
+<!--    <style>-->
+<!--      .row {-->
+<!--          height: 100px;-->
+<!--          padding: 20px;-->
+<!--          margin-left: 0;-->
+<!--          margin-right: 0;-->
+<!--      }-->
+
+<!--      .row>div>h1 {-->
+<!--          color: white;-->
+<!--      }-->
+
+<!--      .row>div>a {-->
+<!--          margin-top: 10px;-->
+<!--          margin-bottom: 10px;-->
+<!--      }-->
+
+<!--      .button-head , .button-main{-->
+<!--          text-align: end;-->
+<!--      }-->
+
+<!--      thead {-->
+<!--          background-color: rgb(10, 141, 21);-->
+<!--          text-align: center;-->
+<!--          color: white;-->
+<!--      }-->
+
+<!--      .button-main > button {-->
+<!--          margin-left: 10px;-->
+<!--      }-->
+
+<!--    .modal-alert-danger {-->
+<!--      padding: 10px 35px;-->
+<!--      margin-bottom: 15px;-->
+<!--      color: #842029;-->
+<!--      background-color: #f8d7da;-->
+<!--      border-color: #f5c2c7;-->
+<!--      }-->
+
+<!--      label.error {-->
+<!--        display: list-item;-->
+<!--        margin-top: 5px;-->
+<!--        color: #842029;-->
+<!--      }-->
+<!--    .hide {-->
+<!--      display: none;-->
+<!--    }-->
+
+<!--    .show {-->
+<!--      display: block !important;-->
+<!--    }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="container">-->
+<!--        <header>-->
+<!--            <div class="row bg-primary">-->
+<!--                <div class="col-6">-->
+<!--                  <h1>Transfer History</h1>-->
+<!--                </div>-->
+<!--                <div class="col-6 button-head">-->
+<!--                    <a href="..">-->
+<!--                        <button class="btn btn-outline-light">-->
+<!--                            <i class="fas fa-list"></i>-->
+<!--                            <span>List of customers</span>-->
+<!--                        </button>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--        </header>-->
+
+<!--        <div class="content">-->
+<!--            <table id="tbTransfer" class="table table-hover">-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th class="text-center">#</th>-->
+<!--                        <th class="text-center">Created At</th>-->
+<!--                        <th class="text-center">Sender ID</th>-->
+<!--                        <th class="text-center">Sender Name</th>-->
+<!--                        <th class="text-center">Recipient ID</th>-->
+<!--                        <th class="text-center">Recipient Name</th>-->
+<!--                        <th class="text-center">Transfer Amount ($)</th>-->
+<!--                        <th class="text-center">Fees (%)</th>-->
+<!--                        <th class="text-center">Fees Amount ($)</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                </tbody>-->
+<!--                <tfoot>-->
+<!--                    <tr>-->
+<!--                        <td colspan="7">Total Fees Amount:</td>-->
+<!--                        <td id="summFeesAmount"></td>-->
+<!--                    </tr>-->
+<!--                </tfoot>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <script src="../assets/jquery/jquery-3.6.1.min.js"></script>-->
+<!--    <script src="../assets/jquery/jquery.validate-v1.19.5.min.js"></script>-->
+<!--    <script src="../assets/bootstrap-5.2.0/js/bootstrap.bundle.min.js"></script>-->
+<!--    <script src="../assets/sweetalert/v2/sweetalert2.js"></script>-->
+<!--    <script src="../assets/js/popper-v1.16.0.min.js"></script>-->
+<!--    <script src="../assets/js/app.js"></script>-->
+<!--    <script type="text/javascript" src="../assets/js/moment-with-locales.min.js"></script>-->
+
+<!--    <script>-->
+<!--        function getAllTransferHistory(){-->
+<!--            $.ajax({-->
+<!--                headers: {-->
+<!--                    "accept": "application/json",-->
+<!--                    "content-type": "application/json"-->
+<!--                },-->
+<!--                type: "GET",-->
+<!--                url: "http://localhost:8080/api/transfers/get-all-histories"-->
+<!--            })-->
+<!--            .done((date) => {-->
+<!--                date.map(item => {-->
+<!--                    $("#tbTransfer tbody").append(App.renderRowTransferHistory(item));-->
+<!--                })-->
+<!--            })-->
+<!--            .fail((jqXHR) =>{-->
+<!--                alert("Get all transfer histories error");-->
+<!--            })-->
+<!--        }-->
+
+<!--        function getSumFeesAmount(){-->
+<!--            $.ajax({-->
+<!--                headers: {-->
+<!--                    "accept": "application/json",-->
+<!--                    "content-type": "application/json"-->
+<!--                },-->
+<!--                type: "GET",-->
+<!--                url: "http://localhost:8080/api/transfers/get-sum-fees-amount"-->
+<!--            })-->
+<!--            .done((data) => {-->
+<!--                $("#summFeesAmount").html(data);-->
+<!--            })-->
+<!--            .fail((jqXHR) => {-->
+<!--                alert("Get all transfer histories error");-->
+<!--            })-->
+<!--        }-->
+
+<!--        function getAllTransferHistoryWithSumFeesAmount(){-->
+<!--            $.ajax({-->
+<!--                headers: {-->
+<!--                    "accept": "application/json",-->
+<!--                    "content-type": "application/json"-->
+<!--                },-->
+<!--                type: "GET",-->
+<!--                url: "http://localhost:8080/api/transfers/get-all-histories-with-sum-fees-amount"-->
+<!--            })-->
+<!--            .done((data) => {-->
+<!--                let transferHistories = data.transferHistories;-->
+<!--                let sumFeesAmount = data.sumFeesAmount;-->
+
+<!--                transferHistories.map(item => {-->
+<!--                    // item.createdAt = moment(item.createdAt).format('L');-->
+<!--                    $("#tbTransfer tbody").append(App.renderRowTransferHistory(item));-->
+<!--                });-->
+<!--                -->
+<!--                $("#summFeesAmount").html(sumFeesAmount);-->
+<!--            })-->
+<!--            .fail((jqXHR) => {-->
+<!--                alert("Get all transfer histories error");-->
+<!--            })-->
+<!--        }-->
+
+
+<!--        getAllTransferHistory();-->
+<!--        getSumFeesAmount();-->
+<!--        getAllTransferHistoryWithSumFeesAmount();-->
+
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
