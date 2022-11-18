@@ -1,2 +1,44 @@
-package com.cg.model.dto;public class CustomerUpdateDTO {
+package com.cg.model.dto;
+
+
+import com.cg.model.Customer;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+import java.math.BigDecimal;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Accessors(chain = true)
+public class CustomerUpdateDTO {
+    private long id;
+
+    //    @NotEmpty(message = "Vui lòng nhập tên đầy đủ")
+//    @Size(min = 10, max = 50, message = "Họ tên có độ dài nằm trong khoảng 10-50 ký tự")
+    private String fullName;
+
+    private String email;
+
+    //    @Pattern(regexp = "^[0][0-9]{9}$", message = "Vui lòng nhập đúng định dạng số điện thoại")
+    private String phone;
+
+    private String balance;
+
+    private LocationRegionDTO locationRegion;
+
+
+    public Customer toUpdateCustomer(){
+        return new Customer()
+                .setId(id)
+                .setFullName(fullName)
+                .setEmail(email)
+                .setPhone(phone)
+                .setBalance(new BigDecimal(balance))
+                .setLocationRegion(locationRegion.toLocationRegion());
+    }
 }

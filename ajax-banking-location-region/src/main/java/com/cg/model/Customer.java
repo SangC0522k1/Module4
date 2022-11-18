@@ -2,6 +2,7 @@ package com.cg.model;
 
 import com.cg.model.dto.CustomerCreateDTO;
 import com.cg.model.dto.CustomerDTO;
+import com.cg.model.dto.CustomerUpdateDTO;
 import com.cg.model.dto.RecipientDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -70,6 +71,16 @@ public class Customer extends BaseEntity {
 
     public CustomerCreateDTO toCustomerCreateDTO() {
         return new CustomerCreateDTO()
+                .setId(id)
+                .setFullName(fullName)
+                .setEmail(email)
+                .setPhone(phone)
+                .setBalance(balance.toString())
+                .setLocationRegion(locationRegion.toLocationRegionDTO());
+    }
+
+    public CustomerUpdateDTO toCustomerUpdateDTO() {
+        return new CustomerUpdateDTO()
                 .setId(id)
                 .setFullName(fullName)
                 .setEmail(email)

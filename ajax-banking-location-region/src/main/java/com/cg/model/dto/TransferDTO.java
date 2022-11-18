@@ -46,7 +46,7 @@ public class TransferDTO implements Validator {
 
         if (transferAmount != null && transferAmount.length() > 0) {
             if (transferAmount.length() > 9){
-                errors.rejectValue("transferAmount", "transferAmount.max", "Số tiền chuyển khoản tối đa là 1.000.000");
+                errors.rejectValue("transferAmount", "transferAmount.max", "Số tiền chuyển khoản tối đa là 999.999.999");
                 return;
             }
 

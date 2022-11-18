@@ -43,4 +43,6 @@ public class CustomerCreateDTO {
             .setBalance(new BigDecimal(0L))
             .setLocationRegion(locationRegion.toLocationRegion());
     }
+
+
 }

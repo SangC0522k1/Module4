@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -76,6 +77,23 @@ public class CustomerRestController {
         return new ResponseEntity<>(recipientDTOS, HttpStatus.OK);
     }
 
+    @PostMapping ("/update")
+    public ResponseEntity<CustomerUpdateDTO> update(@RequestBody CustomerUpdateDTO customerUpdateDTO) {
+
+        long customerId = customerUpdateDTO.getId();
+
+        Optional<Customer> customerOptional = customerService.findById(customerId);
+
+        if (!customerOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Customer customer = customerUpdateDTO.toUpdateCustomer();
+
+        Customer newCustomer = customerService.save(customer);
+//        customerCreateDTO.setId(newCustomer.getId());
+
+        return new ResponseEntity<>(newCustomer.toCustomerUpdateDTO(), HttpStatus.CREATED);
+    }
     @PostMapping("/create")
     public ResponseEntity<CustomerCreateDTO> create(@RequestBody CustomerCreateDTO customerDTO) {
 

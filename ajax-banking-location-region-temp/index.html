@@ -3,7 +3,7 @@
 
 <head>
     <title>List of customers</title>
-    <link rel="shortcut icon" href="./assets/favicon.ico">
+    <!-- f -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./assets/bootstrap/v5.2.2/css/bootstrap.css">
@@ -202,12 +202,12 @@
                         </div>
                         <div class="row col-lg-12 mt-3">
                             <div class="col-lg-6">
-                                <label>Current balance ($)</label>
+                                <label>Current balance (VND)</label>
                                 <input type="text" id="balanceDep" name="balanceDep" class="form-control" readonly
                                     style=" background-color: #e9ecef">
                             </div>
                             <div class="col-lg-6">
-                                <label>Transaction Amount ($)</label>
+                                <label>Transaction Amount (VND)</label>
                                 <input type="text" id="transactionAmountDep" name="transactionAmountDep"
                                     class="form-control">
                             </div>
@@ -250,12 +250,12 @@
                         </div>
                         <div class="row col-lg-12 mt-3">
                             <div class="col-lg-6">
-                                <label>Current balance ($)</label>
+                                <label>Current balance (VND)</label>
                                 <input type="text" id="balanceWd" name="balanceWd" class="form-control" readonly
                                     style=" background-color: #e9ecef">
                             </div>
                             <div class="col-lg-6">
-                                <label>Transaction Amount ($)</label>
+                                <label>Transaction Amount (VND)</label>
                                 <input type="text" id="transactionAmountWd" name="transactionAmountWd"
                                     class="form-control">
                             </div>
@@ -313,7 +313,7 @@
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <label>Transfer Amount ($)</label>
+                                <label>Transfer Amount (VND)</label>
                                 <input type="text" id="transferAmountTrf" name="transferAmountTrf" class="form-control">
                             </div>
                             <div class="col-lg-3">
@@ -322,7 +322,7 @@
                                     style=" background-color: #e9ecef">
                             </div>
                             <div class="col-lg-3">
-                                <label>Transaction Amount ($)</label>
+                                <label>Transaction Amount (VND)</label>
                                 <input type="text" id="transactionAmountTrf" name="transactionAmountTrf"
                                     class="form-control" readonly style=" background-color: #e9ecef">
                             </div>
@@ -922,7 +922,7 @@
                     page.commands.initTooltip();
                     page.elements.modalUpdate.modal("hide");
 
-                    App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_CREATED);
+                    App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_UPDATED);
 
                 })
                 .fail((jqXHR) => {
@@ -1143,7 +1143,7 @@
                 transferAmountTrf: {
                     required: true,
                     min: 500,
-                    max: 1000000
+                    max: 999.999999
                 }
             },
             messages: {

@@ -26,7 +26,7 @@ class App {
     static AlertMessageVi = class {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
-        static SUCCESS_DEPOSIT = "Giao dịch gửi tiền thành công !";
+        static SUCCESS_DEPOSIT = "Giao dịch nạp tiền thành công !";
         static SUCCESS_WITHDRAW = "Giao dịch rút tiền thành công !";
         static SUCCESS_TRANSFER = "Giao dịch chuyển khoản thành công !";
         static SUCCESS_DEACTIVATE = "Hủy kích hoạt khách hàng thành công !";
@@ -65,13 +65,13 @@ class App {
 
         static showSuspendedConfirmDialog() {
             return Swal.fire({
-                icon: 'warning',
-                text: 'Are you sure to suspend the selected customer ?',
+                icon: 'cảnh báo',
+                text: 'Bạn có chắc chắn tạm ngưng khách hàng đã chọn ?',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, please suspend this client !',
-                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Vâng, đình chỉ khách hàng này!',
+                cancelButtonText: 'Hủy bỏ',
             })
         }
     }
@@ -86,7 +86,8 @@ class App {
                 <td>${customer.fullName}</td>
                 <td>${customer.email}</td>
                 <td class="text-center">${customer.phone}</td>
-                <td class="text-end num-space">${customer.balance}</td>
+                <td class="text-end num-space">
+                ${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(customer.balance)}</td>
                 <td>${locationRegion.provinceName}</td>
                 <td>${locationRegion.districtName}</td>
                 <td>${locationRegion.wardName}</td>
