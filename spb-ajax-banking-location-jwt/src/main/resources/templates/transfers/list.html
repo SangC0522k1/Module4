@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Transfer History</title>
-    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <title>Ngân Hàng DMS</title>
+    <link rel="shortcut icon" href="/assets/icon.jpg">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/bootstrap/v5.2.2/css/bootstrap.css">
@@ -38,9 +38,9 @@
                 <th class="text-center">Sender Name</th>
                 <th class="text-center">Recipient ID</th>
                 <th class="text-center">Recipient Name</th>
-                <th class="text-center">Transfer Amount ($)</th>
+                <th class="text-center">Transfer Amount (VND)</th>
                 <th class="text-center">Fees (%)</th>
-                <th class="text-center">Fees Amount ($)</th>
+                <th class="text-center">Fees Amount (VND)</th>
             </tr>
             </thead>
             <tbody>
@@ -124,7 +124,8 @@
                     $("#tbTransfer tbody").append(App.renderRowTransferHistory(item));
                 })
 
-                $("#summFeesAmount").html(sumFeesAmount);
+                $("#summFeesAmount").html(new Intl.NumberFormat('vi-VN').format(sumFeesAmount));
+
             })
             .fail((jqXHR) => {
                 alert("Get all transfer histories error");

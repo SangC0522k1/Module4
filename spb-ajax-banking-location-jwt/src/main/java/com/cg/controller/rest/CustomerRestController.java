@@ -78,8 +78,13 @@ public class CustomerRestController {
         return new ResponseEntity<>(recipientDTOS, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<CustomerCreateDTO> create(@RequestBody CustomerCreateDTO customerDTO) {
+    public ResponseEntity<?> create(@Validated @RequestBody CustomerCreateDTO customerDTO, BindingResult bindingResult) {
+
+        if(bindingResult.hasFieldErrors()){
+            return appUtil.mapErrorToResponse(bindingResult);
+        }
 
         customerDTO.setId(0L);
         Customer customer = customerDTO.toCustomer();
@@ -90,6 +95,27 @@ public class CustomerRestController {
         customerDTO.setBalance("0");
 
         return new ResponseEntity<>(newCustomer.toCustomerCreateDTO(), HttpStatus.CREATED);
+    }
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PostMapping ("/update")
+    public ResponseEntity<?> update(@Validated @RequestBody CustomerUpdateDTO customerUpdateDTO, BindingResult bindingResult) {
+
+        if(bindingResult.hasFieldErrors()){
+            return appUtil.mapErrorToResponse(bindingResult);
+        }
+        long customerId = customerUpdateDTO.getId();
+
+        Optional<Customer> customerOptional = customerService.findById(customerId);
+
+        if (!customerOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Customer customer = customerUpdateDTO.toUpdateCustomer();
+
+        Customer newCustomer = customerService.save(customer);
+//        customerCreateDTO.setId(newCustomer.getId());
+
+        return new ResponseEntity<>(newCustomer.toCustomerUpdateDTO(), HttpStatus.CREATED);
     }
 
     @PostMapping("/deposit")
@@ -127,7 +153,10 @@ public class CustomerRestController {
         BigDecimal transactionAmount = new BigDecimal(Long.parseLong(withdrawDTO.getTransactionAmount()));
 
         if (customerOptional.get().getBalance().compareTo(transactionAmount) < 0){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+            throw new DataInputException("số dư của bạn không đủ !");
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
 
         Withdraw withdraw = new Withdraw();
@@ -220,15 +249,5 @@ public class CustomerRestController {
             throw new DataInputException("Vui lòng liên hệ Administrator");
         }
     }
-    @PostMapping("/update")
-    public ResponseEntity<CustomerCreateDTO> update(@NotNull @RequestBody CustomerCreateDTO customerDTO) {
 
-        Customer customer = customerDTO.toCustomer();
-
-        Customer newCustomer = customerService.save(customer);
-
-        customerDTO.setId(newCustomer.getId());
-
-        return new ResponseEntity<>(newCustomer.toCustomerCreateDTO(), HttpStatus.CREATED);
-    }
 }

@@ -31,7 +31,7 @@ class App {
         static SUCCESS_WITHDRAW = "Giao dịch rút tiền thành công !";
         static SUCCESS_TRANSFER = "Giao dịch chuyển khoản thành công !";
         static SUCCESS_DEACTIVATE = "Hủy kích hoạt khách hàng thành công !";
-
+        static SUCCESS_WITHDRAWFALL = "số dư của khách hàng k đủ";
         static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
         static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
         static ERROR_403 = "Forbidden - Bạn không được quyền truy cập tài nguyên này.";
@@ -67,12 +67,12 @@ class App {
         static showDeleteConfirmDialog() {
             return Swal.fire({
                 icon: 'warning',
-                text: 'Are you sure to suspend the selected customer ?',
+                text: 'Bạn có chắc chắn tạm ngưng khách hàng đã chọn không ?',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, please suspend this client !',
-                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Đúng,tôi muốn vô hiệu hóa !',
+                cancelButtonText: 'Suy nghĩ lại',
             })
         }
     }
@@ -107,7 +107,8 @@ class App {
                 <td>${customer.fullName}</td>
                 <td>${customer.email}</td>
                 <td class="text-center">${customer.phone}</td>
-                <td class="text-end num-space">${customer.balance}</td>
+                <td class="text-end num-space">
+               ${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(customer.balance)}</td>
                 <td>${locationRegion.provinceName}</td>
                 <td>${locationRegion.districtName}</td>
                 <td>${locationRegion.wardName}</td>
@@ -155,9 +156,11 @@ class App {
                 <td>${obj.senderName}</td>
                 <td>${obj.recipientId}</td>
                 <td>${obj.recipientName}</td>
-                <td class="text-end num-space">${obj.transferAmount}</td>
+                <td class="text-end num-space">
+                 ${new Intl.NumberFormat('vi-VN').format(obj.transferAmount)}</td>
                 <td class="text-end num-space">${obj.fees}</td>
-                <td class="text-end num-space">${obj.feesAmount}</td>
+                <td class="text-end num-space">
+                 ${new Intl.NumberFormat('vi-VN').format(obj.feesAmount)}</td>
             </tr>
         `;
 

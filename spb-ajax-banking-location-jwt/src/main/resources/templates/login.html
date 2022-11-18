@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="/assets/icon.jpg">
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="/assets/izitoast/v1.4.0/iziToast-1.4.0.min.css">
@@ -11,56 +12,48 @@
     <link rel="stylesheet" href="/assets/css/login.css">
 </head>
 <body>
-<h2>Sign in/up Form</h2>
-<div class="container" id="container">
-    <div class="form-container sign-up-container">
-        <form action="#">
-            <h1>Create Account</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <label for="role">Role group</label>
-            <select name="role" id="role">
-                <option value="1">Admin role</option>
-                <option value="3">User role</option>
-            </select>
-            <input id="emailSignUp" type="text" placeholder="Email" />
-            <input id="passwordSignUp" type="password" placeholder="Password" />
-            <input id="confirmPasswordSignUp" type="password" placeholder="Confirm Password" />
-            <button id="btnSignUp" class="btn_signup">Sign Up</button>
-        </form>
-    </div>
-    <div class="form-container sign-in-container">
-<!--        <form action="#">-->
-            <h1>Sign in</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>or use your account</span>
-            <input type="text" id="emailLogin" placeholder="Email" />
-            <input type="password" id="passwordLogin" placeholder="Password" />
-            <button id="btnLogin" class="btn_login">LOGIN</button>
-<!--        </form>-->
-    </div>
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button class="ghost" id="signIn">SignIn</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="signUp">Sign Up</button>
-            </div>
+<div class="container">
+    <!--Data or Content-->
+    <div class="box-1">
+        <div class="content-holder">
+            <h2>Hello!</h2>
+
+            <button class="button-1" onclick="signup()">Sign up</button>
+            <button class="button-2" onclick="login()">Login</button>
         </div>
     </div>
-</div>
+
+
+    <!--Forms-->
+    <div class="box-2">
+        <div class="login-form-container">
+            <h1>Cắm Chìa khóa Vào</h1>
+            <input type="text" id="emailLogin" placeholder="Email" class="input-field">
+            <br><br>
+            <input type="password" id="passwordLogin" placeholder="Password" class="input-field">
+            <br><br>
+            <button class="login-button" id="btnLogin" type="button">Login</button>
+        </div>
+
+
+        <!--Create Container for Signup form-->
+        <div class="signup-form-container">
+            <h1 style="margin-top: 20px;">Xin Thông Tin</h1>
+            <label for="role" style="margin-bottom: 10px">Role group</label><br>
+                        <select name="role" id="role" style="margin-bottom: 10px; border-radius: 5px">
+                            <option value="1">Admin role</option>
+                            <option value="3">User role</option>
+                        </select> <br>
+            <input type="text" id="emailSignUp" placeholder="Username" class="input-field">
+            <br><br>
+            <input type="password" id="passwordSignUp" placeholder="Password" class="input-field">
+            <br><br>
+            <input type="password" id="confirmPasswordSignUp" placeholder="ConfirmPassword" class="input-field">
+            <br>
+            <button class="signup-button" id="btnSignUp" type="button" style="margin-top: 5px">Sign Up</button>
+        </div>
+
+    </div>
 
 
     <script type="text/javascript" src="/assets/jquery/jquery-v3.6.0.min.js"></script>
@@ -110,27 +103,34 @@
                     data: JSON.stringify(user)
                 })
                     .done(() => {
-                        App.IziToast.showSuccessAlert("Successful!");
+                        App.IziToast.showSuccessAlert("bạn được cấp chìa khóa nhà!");
                     })
                     .fail(() => {
-                        App.IziToast.showErrorAlert("Error!")
+                        App.IziToast.showErrorAlert("Sai rồi kìa nhìn lại xem !")
                     })
             } else {
-                App.IziToast.showErrorAlert("Error! Check password ")
+                App.IziToast.showErrorAlert("Error! xem lại mật khẩu")
             }
         }
+        function signup()
+        {
+            document.querySelector(".login-form-container").style.cssText = "display: none;";
+            document.querySelector(".signup-form-container").style.cssText = "display: block;";
+            document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom, rgb(56, 189, 149),  rgb(28, 139, 106));";
+            document.querySelector(".button-1").style.cssText = "display: none";
+            document.querySelector(".button-2").style.cssText = "display: block";
 
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
+        };
 
-        signUpButton.addEventListener('click', () => {
-            container.classList.add('right-panel-active');
-        });
+        function login()
+        {
+            document.querySelector(".signup-form-container").style.cssText = "display: none;";
+            document.querySelector(".login-form-container").style.cssText = "display: block;";
+            document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom, rgb(6, 108, 224),  rgb(14, 48, 122));";
+            document.querySelector(".button-2").style.cssText = "display: none";
+            document.querySelector(".button-1").style.cssText = "display: block";
 
-        signInButton.addEventListener('click', () => {
-            container.classList.remove('right-panel-active');
-        });
+        }
 
         page.commands.login = () => {
             let user = {
@@ -148,14 +148,14 @@
                 data: JSON.stringify(user)
             })
             .done(() => {
-                App.IziToast.showSuccessAlert("Login successful");
+                App.IziToast.showSuccessAlert("Bạn được vào nhà");
 
                 setTimeout(() => {
                     window.location.href = "/customers";
                 }, 500)
             })
             .fail(() => {
-                App.IziToast.showErrorAlert("Login fail");
+                App.IziToast.showErrorAlert("Rất tiếc thông tin truyền không đúng ??");
             })
         }
 

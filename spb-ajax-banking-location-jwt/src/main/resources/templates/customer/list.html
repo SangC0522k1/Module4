@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <title>List of customers</title>
+    <title>Ngân Hàng DMS</title>
     <th:block th:replace="layout/head"/>
 </head>
 
@@ -66,6 +66,8 @@
                 <h1 class="modal-title fs-5">Modal create</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="btn-danger hide errorChoice" style="color: red"></div>
+
             <div class="modal-body">
                 <form id="frmCreate" method="post">
                     <div class="row col-lg-12 mt-3">
@@ -127,6 +129,7 @@
                 <h1 class="modal-title fs-5">Modal Update</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="btn-danger hide errorChoice" style="color: red"></div>
             <div class="modal-body">
                 <form id="frmUpdate" method="post">
                     <div class="row col-lg-12 mt-3">
@@ -202,11 +205,11 @@
                     </div>
                     <div class="row col-lg-12 mt-3">
                         <div class="col-lg-6">
-                            <label>Current balance ($)</label>
+                            <label>Current balance (VND)</label>
                             <input type="text" id="balanceDep" name="balanceDep" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-6">
-                            <label>Transaction Amount ($)</label>
+                            <label>Transaction Amount (VND)</label>
                             <input type="text" id="transactionAmountDep" name="transactionAmountDep"
                                    class="form-control">
                         </div>
@@ -247,11 +250,11 @@
                     </div>
                     <div class="row col-lg-12 mt-3">
                         <div class="col-lg-6">
-                            <label>Current balance ($)</label>
+                            <label>Current balance (VND)</label>
                             <input type="text" id="balanceWd" name="balanceWd" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-6">
-                            <label>Transaction Amount ($)</label>
+                            <label>Transaction Amount (VND)</label>
                             <input type="text" id="transactionAmountWd" name="transactionAmountWd"
                                    class="form-control">
                         </div>
@@ -305,7 +308,7 @@
                             </select>
                         </div>
                         <div class="col-lg-3">
-                            <label>Transfer Amount ($)</label>
+                            <label>Transfer Amount (VND)</label>
                             <input type="text" id="transferAmountTrf" name="transferAmountTrf" class="form-control">
                         </div>
                         <div class="col-lg-3">
@@ -313,7 +316,7 @@
                             <input type="text" name="feesTrf" value="10" class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
                         <div class="col-lg-3">
-                            <label>Transaction Amount ($)</label>
+                            <label>Transaction Amount (VND)</label>
                             <input type="text" id="transactionAmountTrf" name="transactionAmountTrf"
                                    class="form-control" readonly style=" background-color: #e9ecef">
                         </div>
@@ -570,12 +573,14 @@
 
     $("#btnCreate").on("click", () => {
         $("#frmCreate").trigger("submit");
+        $(".errorChoice").empty();
     })
     $("#btnDeposit").on("click", () => {
         $("#frmDeposit").trigger("submit");
     })
     page.dialogs.elements.btnUpdate.on("click", () => {
         page.dialogs.elements.frmUpdate.trigger("submit");
+        $(".errorChoice").empty();
     })
 
     page.dialogs.elements.btnWithdraw.on("click", () => {
@@ -617,10 +622,10 @@
         let districtId = $(this).val();
         page.commands.getAllWardsByDistrictId(districtId);
     })
-
-    page.dialogs.elements.btnWithdraw.on("click", () => {
-        page.dialogs.elements.frmWithdraw.trigger("submit");
-    })
+    //
+    // page.dialogs.elements.btnWithdraw.on("click", () => {
+    //     page.dialogs.elements.frmWithdraw.trigger("submit");
+    // })
 
     page.dialogs.elements.provinceCre.on("change", function () {
         let provinceId = $(this).val();
@@ -755,7 +760,6 @@
     }
 
     page.commands.createCustomer = () => {
-
         locationRegion.id = 0;
         locationRegion.provinceId = page.dialogs.elements.provinceCre.val();
         locationRegion.provinceName = page.dialogs.elements.provinceCre.find("option:selected").text();
@@ -785,7 +789,6 @@
                 customer = data;
                 locationRegion = customer.locationRegion;
                 page.elements.tbCustomer.prepend(App.renderRowCustomer(customer, locationRegion));
-
                 page.commands.handleShowFooterButton();
                 page.commands.removeEventOpenModal();
                 page.commands.handleOpenModalDeposit();
@@ -795,12 +798,26 @@
 
                 page.commands.initTooltip();
                 page.elements.modalCreate.modal("hide");
+                $(".errorChoice").empty();
 
                 App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_CREATED);
+                $("#frmCreate")[0].reset();
 
             })
             .fail((jqXHR) => {
-                App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_400);
+                $(".errorChoice").empty();
+                let str ="";
+                let message = jqXHR.responseJSON.message;
+                if(message){
+                    str += `<label id="mesaageCreate-error" class="error" for="mesaageCreat">${message}</label>`;
+                }
+                else {
+                    let errors = jqXHR.responseJSON;
+                    $.each(errors, (key, value) => {
+                        str +=`<lable id="${key}Create-error" class="error" for="${key}Create">${value}</lable>`;
+                    })
+                }
+                $(".errorChoice").append(str).removeClass("hide").addClass("show");
             })
     }
 
@@ -819,7 +836,7 @@
                         page.dialogs.elements.wardUp.val(customer.locationRegion.wardId);
                         page.dialogs.elements.addressUp.val(customer.locationRegion.address);
                         page.elements.modalUpdate.modal("show");
-
+                        $(".errorChoice").empty();
                     })
 
                 })
@@ -860,6 +877,7 @@
 
                 $("#modalDeposit").modal("hide");
                 App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_DEPOSIT);
+                $("#frmDeposit")[0].reset();
             })
             .fail((jqXHR) => {
                 App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_400);
@@ -897,7 +915,7 @@
             .done((data) => {
                 let currentRow = $("#tr_" + data.id);
                 currentRow.replaceWith(App.renderRowCustomer(data, data.locationRegion));
-
+                $(".errorChoice").empty();
                 page.commands.removeEventOpenModal();
                 page.commands.handleOpenModalDeposit();
                 page.commands.handleOpenModalWithdraw();
@@ -912,7 +930,19 @@
 
             })
             .fail((jqXHR) => {
-                App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_400);
+                $(".errorChoice").empty();
+                let str ="";
+                let message = jqXHR.responseJSON.message;
+                if(message){
+                    str += `<label id="mesaageCreate-error" class="error" for="mesaageUpdate">${message}</label>`;
+                }
+                else {
+                    let errors = jqXHR.responseJSON;
+                    $.each(errors, (key, value) => {
+                        str +=`<lable id="${key}Create-error" class="error" for="${key}Update">${value}</lable>`;
+                    })
+                }
+                $(".errorChoice").append(str).removeClass("hide").addClass("show");
             })
     }
 
@@ -946,7 +976,23 @@
                 App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_WITHDRAW);
             })
             .fail((jqXHR) => {
-                App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_400);
+                $("#modalWithdraw.modal-body .modal-alert-danger").empty();
+
+                let str = "";
+
+                let message = jqXHR.responseJSON.message;
+
+                if (message) {
+                    str += `<label id="messageTrf-error" class="error" for="messageTrf">${message}</label>`;
+                } else {
+                    let errors = jqXHR.responseJSON;
+
+                    $.each(errors, (key, value) => {
+                        str += `<label id="${key}Trf-error" class="error" for="${key}Trf">${value}</label>`;
+                    })
+                }
+
+                $("#modalWithdraw .modal-body .modal-alert-danger").append(str).removeClass("hide").addClass("show");
             })
     }
 
@@ -989,6 +1035,7 @@
                 App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_TRANSFER);
             })
             .fail((jqXHR) => {
+
                 $("#modalTransfer .modal-body .modal-alert-danger").empty();
 
                 let str = "";
@@ -1033,13 +1080,24 @@
                 required: true,
                 minlength: 5,
                 maxlength: 35
+            },
+            phoneUp: {
+                required: true,
+                minlength: 10,
+                maxlength: 11
             }
         },
         messages: {
-            fullNameCre: {
+            fullNameUp: {
                 required: "Vui lòng nhập tên đầy đủ",
                 minlength: "Họ tên tối thiểu 5 ký tự",
-                maxlength: "Họ tên tối đa 35 ký tự"
+                maxlength: "Họ tên tối đa 50 ký tự"
+            },
+            emailUp: {
+                required: "Vui lòng nhập tên đầy đủ",
+            },
+            phoneUp: {
+                required: "Vui lòng nhập tên đầy đủ",
             }
         },
         submitHandler: function () {
@@ -1052,7 +1110,7 @@
             transactionAmountDep: {
                 required: true,
                 min: 500,
-                max: 1000000
+                max: 999999999
             }
         },
         messages: {
@@ -1068,17 +1126,28 @@
     })
     page.dialogs.elements.frmUpdate.validate({
         rules: {
-            fullNameEdit: {
+            fullNameUp: {
                 required: true,
                 minlength: 5,
                 maxlength: 50
+            },
+            phoneUp: {
+                required: true,
+                minlength: 10,
+                maxlength: 11
             }
         },
         messages: {
-            fullNameEdit: {
+            fullNameUp: {
                 required: "Vui lòng nhập tên đầy đủ",
                 minlength: "Họ tên tối thiểu 5 ký tự",
                 maxlength: "Họ tên tối đa 50 ký tự"
+            },
+            emailUp: {
+                required: "Vui lòng nhập tên đầy đủ",
+            },
+            phoneUp: {
+                required: "Vui lòng nhập tên đầy đủ",
             }
         },
         submitHandler: function () {
@@ -1091,7 +1160,7 @@
             transactionAmountWd: {
                 required: true,
                 min: 500,
-                max: 1000000
+                max: 100000000
             }
         },
         messages: {
@@ -1129,7 +1198,7 @@
             transferAmountTrf: {
                 required: true,
                 min: 500,
-                max: 1000000
+                max: 100000000
             }
         },
         messages: {

@@ -1,5 +1,6 @@
 package com.cg.model.dto;
 
+
 import com.cg.model.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,17 +13,15 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
-public class CustomerCreateDTO {
-
+public class CustomerUpdateDTO {
     private long id;
 
-    @NotEmpty(message = "Vui lòng nhập tên đầy đủ")
+        @NotEmpty(message = "Vui lòng nhập tên đầy đủ")
     @Size(min = 5, max = 50, message = "Họ tên có độ dài nằm trong khoảng 5-50 ký tự")
     private String fullName;
 
@@ -35,13 +34,13 @@ public class CustomerCreateDTO {
 
     private LocationRegionDTO locationRegion;
 
-    public Customer toCustomer(){
+    public Customer toUpdateCustomer(){
         return new Customer()
-            .setId(id)
-            .setFullName(fullName)
-            .setEmail(email)
-            .setPhone(phone)
-            .setBalance(new BigDecimal(0L))
-            .setLocationRegion(locationRegion.toLocationRegion());
+                .setId(id)
+                .setFullName(fullName)
+                .setEmail(email)
+                .setPhone(phone)
+                .setBalance(new BigDecimal(balance))
+                .setLocationRegion(locationRegion.toLocationRegion());
     }
 }

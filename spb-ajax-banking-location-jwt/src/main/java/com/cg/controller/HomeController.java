@@ -25,4 +25,12 @@ public class HomeController {
 
         return modelAndView;
     }
+
+    @GetMapping("/403")
+    public ModelAndView showErrorPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error/403");
+
+        return modelAndView;
+    }
 }
